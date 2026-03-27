@@ -1,4 +1,4 @@
-const AuthForm = ({ mode, formData, onInputChange, onSubmit }) => {
+const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, errorMessage, successMessage }) => {
   const isLogin = mode === 'login';
 
   return (
@@ -151,7 +151,12 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit }) => {
         </div>
       )}
 
-      <button type="submit">{isLogin ? 'Sign in' : 'Sign up'}</button>
+      {errorMessage ? <p className="auth-message auth-message-error">{errorMessage}</p> : null}
+      {successMessage ? <p className="auth-message auth-message-success">{successMessage}</p> : null}
+
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Please wait...' : isLogin ? 'Sign in' : 'Sign up'}
+      </button>
     </form>
   );
 };

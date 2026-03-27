@@ -158,6 +158,30 @@ body {
   cursor: pointer;
 }
 
+.auth-form button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  margin: 0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+.auth-message-error {
+  color: #9f2222;
+  background: #fdecec;
+  border: 1px solid #f3cccc;
+}
+
+.auth-message-success {
+  color: #0f5a3b;
+  background: #e6f6ee;
+  border: 1px solid #c9ead8;
+}
+
 .review-section h2 {
   margin-top: 0;
 }

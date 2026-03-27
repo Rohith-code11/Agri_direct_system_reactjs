@@ -18,5 +18,14 @@ export const getAuthPayload = (mode, formData) => {
     };
   }
 
-  return formData;
+  return {
+    name: formData.name,
+    mobile: formData.mobile,
+    email: formData.email,
+    userType: formData.userType,
+    county: formData.county,
+    townCity: formData.townCity,
+    postcode: formData.postcode,
+    password: formData.password
+  };
 };
