@@ -58,6 +58,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
               placeholder="Enter your mobile number"
               value={formData.mobile}
               onChange={onInputChange}
+              maxLength={20}
               required
             />
           </label>
@@ -85,7 +86,6 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
               <option value="">Select role</option>
               <option value="grower">Grower</option>
               <option value="buyer">Buyer</option>
-              <option value="distributor">Distributor</option>
             </select>
           </label>
 
@@ -121,6 +121,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
               placeholder="Enter postcode"
               value={formData.postcode}
               onChange={onInputChange}
+              maxLength={20}
               required
             />
           </label>

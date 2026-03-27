@@ -4,7 +4,7 @@ import FeatureList from '../../../reusable-components/FeatureList';
 import { getAuthPayload, initialAuthForm } from '../../../utils/authHelpers';
 import { loginUser, registerUser } from '../../../utils/authApi';
 
-const HomeAuthentication = () => {
+const HomeAuthentication = ({ onLoginSuccess }) => {
   const [mode, setMode] = useState('login');
   const [formData, setFormData] = useState(initialAuthForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,9 +42,11 @@ const HomeAuthentication = () => {
       if (mode === 'login') {
         const response = await loginUser(payload);
         const token = response?.data?.token;
+        const user = response?.data?.user;
 
-        if (token) {
-          localStorage.setItem('authToken', token);
+        if (typeof onLoginSuccess === 'function' && token && user) {
+          onLoginSuccess({ token, user });
+          return;
         }
 
         setSuccessMessage(response.message || 'Login successful');
