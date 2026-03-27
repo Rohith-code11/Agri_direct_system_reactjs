@@ -1,24 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import './assets/global.css';
+import HomeAuthentication from './screens/pages/home/authentication';
+import ReviewAndRatingsAuthentication from './screens/pages/review-and-ratings/authentication';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="app-shell">
+      <HomeAuthentication />
+      <ReviewAndRatingsAuthentication />
+    </main>
   );
 }
 
