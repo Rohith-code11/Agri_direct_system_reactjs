@@ -1,6 +1,6 @@
 const ROLE_MENUS = {
-  grower: ['Dashboard', 'Inventory', 'Profile'],
-  buyer: ['Dashboard', 'Marketplace', 'Profile']
+  grower: ['Dashboard', 'Inventory', 'Orders', 'Notifications', 'Profile'],
+  buyer: ['Dashboard', 'Marketplace', 'Cart', 'Orders', 'Notifications', 'Profile']
 };
 
 const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
@@ -17,7 +17,7 @@ const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
       <div className="dashboard-navbar-top">
         <div className="dashboard-brand-wrap">
           <div className="dashboard-brand-logo" aria-hidden="true">
-            AD
+            <span>AG</span>
           </div>
           <div>
             <p className="dashboard-navbar-eyebrow">AgriDirect Exchange</p>
@@ -27,7 +27,10 @@ const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
         </div>
 
         <div className="dashboard-navbar-actions">
-          <span className="dashboard-role-badge">{user?.userType || 'member'}</span>
+          <div className="dashboard-user-summary">
+            <span className="dashboard-role-badge">{user?.userType || 'member'}</span>
+            <small>{user?.email || 'No email'}</small>
+          </div>
           <button type="button" onClick={onLogout}>
             Logout
           </button>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getMarketplaceListings } from '../../../utils/authApi';
+import { addCartItem, getMarketplaceListings } from '../../../utils/authApi';
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -9,7 +9,7 @@ const formatCurrency = (value) => {
   }).format(value || 0);
 };
 
-const Marketplace = ({ token }) => {
+const Marketplace = ({ token, onOpenCart }) => {
   const [filters, setFilters] = useState({
     search: '',
     category: '',
@@ -21,6 +21,9 @@ const Marketplace = ({ token }) => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [quantities, setQuantities] = useState({});
+  const [busyListingId, setBusyListingId] = useState(null);
 
   const loadListings = useCallback(async (activeFilters) => {
     if (!token) {
@@ -32,9 +35,20 @@ const Marketplace = ({ token }) => {
     try {
       setLoading(true);
       setError('');
+      setSuccess('');
       const response = await getMarketplaceListings(token, activeFilters);
-      setListings(response?.data?.listings || []);
+      const nextListings = response?.data?.listings || [];
+      setListings(nextListings);
       setOptions(response?.data?.options || { categories: [], counties: [] });
+      setQuantities((prev) => {
+        const next = { ...prev };
+        nextListings.forEach((item) => {
+          if (!next[item.id]) {
+            next[item.id] = String(item.minOrderQty || 1);
+          }
+        });
+        return next;
+      });
     } catch (fetchError) {
       setError(fetchError.message || 'Failed to load marketplace.');
     } finally {
@@ -60,6 +74,23 @@ const Marketplace = ({ token }) => {
     const reset = { search: '', category: '', county: '', minPrice: '', maxPrice: '' };
     setFilters(reset);
     loadListings(reset);
+  };
+
+  const onAddToCart = async (listingId) => {
+    try {
+      setBusyListingId(listingId);
+      setError('');
+      setSuccess('');
+      await addCartItem(token, {
+        listingId,
+        quantity: Number(quantities[listingId] || 1)
+      });
+      setSuccess('Listing added to cart successfully.');
+    } catch (cartError) {
+      setError(cartError.message || 'Failed to add item to cart.');
+    } finally {
+      setBusyListingId(null);
+    }
   };
 
   return (
@@ -121,6 +152,7 @@ const Marketplace = ({ token }) => {
 
       {loading ? <p className="dashboard-message">Loading marketplace...</p> : null}
       {error ? <p className="dashboard-message dashboard-message-error">{error}</p> : null}
+      {success ? <p className="auth-message auth-message-success">{success}</p> : null}
       {!loading && !error && listings.length === 0 ? (
         <p className="dashboard-message">No listings match your filters.</p>
       ) : null}
@@ -145,9 +177,22 @@ const Marketplace = ({ token }) => {
               <p><strong>Price:</strong> {formatCurrency(item.pricePerUnit)} / {item.unit}</p>
               <p><strong>Available Qty:</strong> {item.quantityAvailable} {item.unit}</p>
               <p><strong>Min Order:</strong> {item.minOrderQty} {item.unit}</p>
+              <label className="marketplace-qty-field">
+                Order Qty
+                <input
+                  type="number"
+                  min={item.minOrderQty}
+                  max={item.quantityAvailable}
+                  step="0.01"
+                  value={quantities[item.id] || item.minOrderQty}
+                  onChange={(event) => setQuantities((prev) => ({ ...prev, [item.id]: event.target.value }))}
+                />
+              </label>
               <div className="marketplace-card-foot">
-                <button type="button">View Details</button>
-                <button type="button" className="secondary-btn">Add to Cart</button>
+                <button type="button" onClick={onOpenCart}>Go to Cart</button>
+                <button type="button" className="secondary-btn" onClick={() => onAddToCart(item.id)} disabled={busyListingId === item.id}>
+                  {busyListingId === item.id ? 'Adding...' : 'Add to Cart'}
+                </button>
               </div>
             </article>
           ))}

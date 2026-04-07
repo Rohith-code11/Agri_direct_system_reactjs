@@ -8,6 +8,9 @@ import BuyerDashboard from './screens/pages/dashboard/BuyerDashboard';
 import Inventory from './screens/pages/dashboard/Inventory';
 import Marketplace from './screens/pages/dashboard/Marketplace';
 import Profile from './screens/pages/profile/Profile';
+import Cart from './screens/pages/cart/Cart';
+import Orders from './screens/pages/orders/Orders';
+import Notifications from './screens/pages/notifications/Notifications';
 
 const getStoredUser = () => {
   try {
@@ -63,11 +66,29 @@ function App() {
       if (activeMenu === 'Inventory') {
         return <Inventory token={authToken} />;
       }
+      if (activeMenu === 'Orders') {
+        return <Orders token={authToken} role="grower" />;
+      }
+      if (activeMenu === 'Notifications') {
+        return <Notifications token={authToken} />;
+      }
       return <GrowerDashboard user={authUser} token={authToken} />;
     }
 
     if (activeMenu === 'Marketplace') {
-      return <Marketplace token={authToken} />;
+      return <Marketplace token={authToken} onOpenCart={() => setActiveMenu('Cart')} />;
+    }
+
+    if (activeMenu === 'Cart') {
+      return <Cart token={authToken} onCheckoutComplete={() => setActiveMenu('Orders')} />;
+    }
+
+    if (activeMenu === 'Orders') {
+      return <Orders token={authToken} role="buyer" />;
+    }
+
+    if (activeMenu === 'Notifications') {
+      return <Notifications token={authToken} />;
     }
 
     return <BuyerDashboard user={authUser} token={authToken} />;

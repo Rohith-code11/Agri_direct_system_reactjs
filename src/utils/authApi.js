@@ -51,6 +51,19 @@ const getAuthorizedResponse = async (endpoint, token) => {
   return parseResponse(response);
 };
 
+const sendAuthorizedRequest = async (endpoint, token, options = {}) => {
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
+    headers: {
+      ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+      Authorization: `Bearer ${token}`,
+      ...(options.headers || {})
+    }
+  });
+
+  return parseResponse(response);
+};
+
 export const getGrowerDashboard = async (token) => {
   return getAuthorizedResponse('/dashboard/grower', token);
 };
@@ -104,4 +117,79 @@ export const createGrowerListing = async (token, formData) => {
   });
 
   return parseResponse(response);
+};
+
+export const updateGrowerListing = async (token, listingId, payload) => {
+  return sendAuthorizedRequest(`/listings/grower/${listingId}`, token, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
+};
+
+export const deleteGrowerListing = async (token, listingId) => {
+  return sendAuthorizedRequest(`/listings/grower/${listingId}`, token, {
+    method: 'DELETE'
+  });
+};
+
+export const getMyCart = async (token) => {
+  return getAuthorizedResponse('/cart/me', token);
+};
+
+export const addCartItem = async (token, payload) => {
+  return sendAuthorizedRequest('/cart/items', token, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+};
+
+export const updateCartItem = async (token, itemId, payload) => {
+  return sendAuthorizedRequest(`/cart/items/${itemId}`, token, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
+};
+
+export const removeCartItem = async (token, itemId) => {
+  return sendAuthorizedRequest(`/cart/items/${itemId}`, token, {
+    method: 'DELETE'
+  });
+};
+
+export const checkoutCart = async (token, payload) => {
+  return sendAuthorizedRequest('/cart/checkout', token, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+};
+
+export const getBuyerOrders = async (token) => {
+  return getAuthorizedResponse('/orders/buyer', token);
+};
+
+export const getGrowerOrders = async (token) => {
+  return getAuthorizedResponse('/orders/grower', token);
+};
+
+export const updateGrowerOrderStatus = async (token, orderId, payload) => {
+  return sendAuthorizedRequest(`/orders/${orderId}/status`, token, {
+    method: 'PATCH',
+    body: JSON.stringify(payload)
+  });
+};
+
+export const getNotifications = async (token) => {
+  return getAuthorizedResponse('/notifications', token);
+};
+
+export const markNotificationRead = async (token, notificationId) => {
+  return sendAuthorizedRequest(`/notifications/${notificationId}/read`, token, {
+    method: 'PATCH'
+  });
+};
+
+export const markAllNotificationsRead = async (token) => {
+  return sendAuthorizedRequest('/notifications/read-all', token, {
+    method: 'PATCH'
+  });
 };
