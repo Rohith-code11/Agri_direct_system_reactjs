@@ -81,6 +81,11 @@ const HomeAuthentication = ({ onLoginSuccess }) => {
       />
 
       <div className="auth-card-wrap">
+        <div className="auth-card-intro">
+          <span className="auth-card-badge">Operational Access</span>
+          <p>Sign in to monitor stock movement, incoming demand, order fulfilment, and location-aware delivery updates.</p>
+        </div>
+
         <div className="auth-toggle">
           <button
             type="button"

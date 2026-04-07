@@ -12,7 +12,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
 
       {isLogin ? (
         <>
-          <label>
+          <label className="field-block">
             Email
             <input
               type="email"
@@ -24,7 +24,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Password
             <input
               type="password"
@@ -38,7 +38,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
         </>
       ) : (
         <div className="auth-grid">
-          <label>
+          <label className="field-block">
             Full Name
             <input
               type="text"
@@ -50,7 +50,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Mobile Number
             <input
               type="tel"
@@ -63,7 +63,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Email
             <input
               type="email"
@@ -75,7 +75,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             User Type
             <select
               name="userType"
@@ -89,7 +89,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             </select>
           </label>
 
-          <label>
+          <label className="field-block">
             County
             <input
               type="text"
@@ -101,7 +101,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Town/City
             <input
               type="text"
@@ -113,7 +113,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Postcode
             <input
               type="text"
@@ -126,7 +126,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Password
             <input
               type="password"
@@ -138,7 +138,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
             />
           </label>
 
-          <label>
+          <label className="field-block">
             Confirm Password
             <input
               type="password"
