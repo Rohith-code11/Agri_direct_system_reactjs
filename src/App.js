@@ -76,7 +76,7 @@ function App() {
     }
 
     if (activeMenu === 'Marketplace') {
-      return <Marketplace token={authToken} onOpenCart={() => setActiveMenu('Cart')} />;
+      return <Marketplace token={authToken} />;
     }
 
     if (activeMenu === 'Cart') {

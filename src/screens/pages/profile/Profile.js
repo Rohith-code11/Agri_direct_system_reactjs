@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getMyProfile, updateMyProfile } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faHouse, faLocationDot, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Profile = ({ user, token, onUserRefresh }) => {
   const [formData, setFormData] = useState({
@@ -135,15 +137,15 @@ const Profile = ({ user, token, onUserRefresh }) => {
             <article className="dashboard-card">
               <h3>Account Details</h3>
               <label>
-                Name
+                <span className="field-label"><FontAwesomeIcon icon={faUser} /> Name</span>
                 <input name="name" value={formData.name} onChange={onInputChange} maxLength={120} required />
               </label>
               <label>
-                Email
+                <span className="field-label"><FontAwesomeIcon icon={faEnvelope} /> Email</span>
                 <input name="email" value={formData.email} disabled />
               </label>
               <label>
-                Mobile
+                <span className="field-label"><FontAwesomeIcon icon={faPhone} /> Mobile</span>
                 <input name="mobile" value={formData.mobile} onChange={onInputChange} maxLength={20} required />
               </label>
               <label>
@@ -151,11 +153,11 @@ const Profile = ({ user, token, onUserRefresh }) => {
                 <input name="userType" value={formData.userType} disabled />
               </label>
               <label>
-                County
+                <span className="field-label"><FontAwesomeIcon icon={faLocationDot} /> County</span>
                 <input name="county" value={formData.county} onChange={onInputChange} maxLength={120} required />
               </label>
               <label>
-                Town/City
+                <span className="field-label"><FontAwesomeIcon icon={faLocationDot} /> Town/City</span>
                 <input name="townCity" value={formData.townCity} onChange={onInputChange} maxLength={120} required />
               </label>
               <label>
@@ -167,7 +169,7 @@ const Profile = ({ user, token, onUserRefresh }) => {
             <article className="dashboard-card">
               <h3>Address Details</h3>
               <label>
-                Address Label
+                <span className="field-label"><FontAwesomeIcon icon={faHouse} /> Address Label</span>
                 <input name="addressLabel" value={formData.addressLabel} onChange={onInputChange} maxLength={50} required />
               </label>
               <label>

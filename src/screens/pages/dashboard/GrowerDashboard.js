@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getGrowerDashboard } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBoxesStacked, faMoneyBillWave, faReceipt } from '@fortawesome/free-solid-svg-icons';
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -50,27 +52,9 @@ const GrowerDashboard = ({ user, token }) => {
   }, [token]);
 
   const cards = [
-    { title: 'Active Listings', value: `${summary.activeListings} lots` },
-    { title: 'Incoming Orders', value: `${summary.incomingOrders} orders` },
-    { title: 'Expected Payout', value: formatCurrency(summary.expectedPayout) }
-  ];
-
-  const pulseItems = [
-    {
-      label: 'Market Reach',
-      value: summary.activeListings > 0 ? 'Visible to buyers' : 'No live reach',
-      tone: summary.activeListings > 0 ? 'positive' : 'warning'
-    },
-    {
-      label: 'Order Queue',
-      value: summary.incomingOrders > 0 ? `${summary.incomingOrders} active requests` : 'Queue is clear',
-      tone: summary.incomingOrders > 0 ? 'accent' : 'neutral'
-    },
-    {
-      label: 'Cash Outlook',
-      value: summary.expectedPayout > 0 ? formatCurrency(summary.expectedPayout) : 'No pending payout',
-      tone: summary.expectedPayout > 0 ? 'positive' : 'neutral'
-    }
+    { title: 'Active Listings', value: `${summary.activeListings} lots`, icon: faBoxesStacked },
+    { title: 'Incoming Orders', value: `${summary.incomingOrders} orders`, icon: faReceipt },
+    { title: 'Expected Payout', value: formatCurrency(summary.expectedPayout), icon: faMoneyBillWave }
   ];
 
   return (
@@ -91,6 +75,7 @@ const GrowerDashboard = ({ user, token }) => {
           <div className="dashboard-card-grid">
             {cards.map((card) => (
               <article className="dashboard-card" key={card.title}>
+                <div className="card-icon-wrap"><FontAwesomeIcon icon={card.icon} /></div>
                 <h3>{card.title}</h3>
                 <p>{card.value}</p>
               </article>
@@ -107,75 +92,8 @@ const GrowerDashboard = ({ user, token }) => {
               </strong>
               <p>Keep fulfilment status fresh so buyers trust your dispatch timelines.</p>
             </article>
-
-            <article className="dashboard-summary">
-              <span className="dashboard-summary-label">Quick Insight</span>
-              <strong>Strong listing activity improves discoverability.</strong>
-              <p>Higher listing quality and accurate stock data usually convert faster in the buyer marketplace.</p>
-            </article>
-          </div>
-
-          <div className="dashboard-story-grid">
-            <article className="dashboard-card dashboard-story-card">
-              <div className="dashboard-story-head">
-                <div>
-                  <span className="dashboard-summary-label">Grower Focus</span>
-                  <h3>Today&apos;s farm-side priorities</h3>
-                </div>
-              </div>
-              <div className="dashboard-checklist">
-                <div>
-                  <strong>Refresh listing quantities</strong>
-                  <p>Buyers rely on live available stock before placing grouped orders.</p>
-                </div>
-                <div>
-                  <strong>Confirm pending orders quickly</strong>
-                  <p>Fast responses reduce buyer churn and improve repeat procurement.</p>
-                </div>
-                <div>
-                  <strong>Keep dispatch windows accurate</strong>
-                  <p>Delivery confidence improves when the latest order state is up to date.</p>
-                </div>
-              </div>
-            </article>
-
-            <article className="dashboard-card dashboard-story-card">
-              <span className="dashboard-summary-label">Territory Snapshot</span>
-              <h3>{user?.county || 'Your county'} sourcing pulse</h3>
-              <p>
-                Inventory visibility around {user?.townCity || 'your base town'} looks strongest when listings stay active,
-                image-ready, and priced consistently against quantity bands.
-              </p>
-            </article>
           </div>
         </div>
-
-        <aside className="dashboard-side-column">
-          <article className="dashboard-side-card dashboard-side-feature">
-            <span className="dashboard-summary-label">Farm Pulse</span>
-            <h3>Operational health</h3>
-            <div className="dashboard-pulse-list">
-              {pulseItems.map((item) => (
-                <div className={`dashboard-pulse-item tone-${item.tone}`} key={item.label}>
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <article className="dashboard-side-card">
-            <span className="dashboard-summary-label">Next Best Move</span>
-            <h3>Boost buyer confidence</h3>
-            <p>Add fresh photos, tighten min-order quantities, and keep inactive stock out of the live catalog.</p>
-          </article>
-
-          <article className="dashboard-side-card">
-            <span className="dashboard-summary-label">Region</span>
-            <h3>{user?.townCity || 'Local hub'}</h3>
-            <p>{user?.county || 'Primary region'} operations are ready for listing, dispatch, and status management.</p>
-          </article>
-        </aside>
       </div>
     </section>
   );

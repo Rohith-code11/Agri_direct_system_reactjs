@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 const ReviewCard = ({ name, role, rating, feedback }) => {
   return (
     <article className="review-card">
@@ -10,7 +13,7 @@ const ReviewCard = ({ name, role, rating, feedback }) => {
           <p className="review-role">{role}</p>
         </div>
       </div>
-      <p className="review-rating">Rating: {rating}/5</p>
+      <p className="review-rating"><FontAwesomeIcon icon={faStar} /> Rating: {rating}/5</p>
       <p>{feedback}</p>
     </article>
   );

@@ -1,3 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEnvelope,
+  faKey,
+  faLocationDot,
+  faMobileScreen,
+  faUser,
+  faUserTag
+} from '@fortawesome/free-solid-svg-icons';
+
 const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, errorMessage, successMessage }) => {
   const isLogin = mode === 'login';
 
@@ -13,7 +23,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
       {isLogin ? (
         <>
           <label className="field-block">
-            Email
+            <span className="field-label"><FontAwesomeIcon icon={faEnvelope} /> Email</span>
             <input
               type="email"
               name="email"
@@ -25,7 +35,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Password
+            <span className="field-label"><FontAwesomeIcon icon={faKey} /> Password</span>
             <input
               type="password"
               name="password"
@@ -39,7 +49,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
       ) : (
         <div className="auth-grid">
           <label className="field-block">
-            Full Name
+            <span className="field-label"><FontAwesomeIcon icon={faUser} /> Full Name</span>
             <input
               type="text"
               name="name"
@@ -51,7 +61,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Mobile Number
+            <span className="field-label"><FontAwesomeIcon icon={faMobileScreen} /> Mobile Number</span>
             <input
               type="tel"
               name="mobile"
@@ -64,7 +74,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Email
+            <span className="field-label"><FontAwesomeIcon icon={faEnvelope} /> Email</span>
             <input
               type="email"
               name="email"
@@ -76,7 +86,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            User Type
+            <span className="field-label"><FontAwesomeIcon icon={faUserTag} /> User Type</span>
             <select
               name="userType"
               value={formData.userType}
@@ -90,7 +100,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            County
+            <span className="field-label"><FontAwesomeIcon icon={faLocationDot} /> County</span>
             <input
               type="text"
               name="county"
@@ -102,7 +112,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Town/City
+            <span className="field-label"><FontAwesomeIcon icon={faLocationDot} /> Town/City</span>
             <input
               type="text"
               name="townCity"
@@ -114,7 +124,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Postcode
+            <span className="field-label"><FontAwesomeIcon icon={faLocationDot} /> Postcode</span>
             <input
               type="text"
               name="postcode"
@@ -127,7 +137,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Password
+            <span className="field-label"><FontAwesomeIcon icon={faKey} /> Password</span>
             <input
               type="password"
               name="password"
@@ -139,7 +149,7 @@ const AuthForm = ({ mode, formData, onInputChange, onSubmit, isSubmitting, error
           </label>
 
           <label className="field-block">
-            Confirm Password
+            <span className="field-label"><FontAwesomeIcon icon={faKey} /> Confirm Password</span>
             <input
               type="password"
               name="confirmPassword"

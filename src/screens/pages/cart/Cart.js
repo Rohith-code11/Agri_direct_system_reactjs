@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { checkoutCart, getMyCart, removeCartItem, updateCartItem } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCreditCard, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -150,6 +152,7 @@ const Cart = ({ token, onCheckoutComplete }) => {
                     />
                   </label>
                   <button type="button" className="secondary-btn" onClick={() => onRemove(item.itemId)} disabled={busyItemId === item.itemId}>
+                    <FontAwesomeIcon icon={faTrashCan} />
                     {busyItemId === item.itemId ? 'Working...' : 'Remove'}
                   </button>
                 </div>
@@ -186,6 +189,7 @@ const Cart = ({ token, onCheckoutComplete }) => {
                 />
               </label>
               <button type="submit" className="profile-save-btn" disabled={checkingOut}>
+                <FontAwesomeIcon icon={faCreditCard} />
                 {checkingOut ? 'Placing Orders...' : 'Checkout'}
               </button>
             </form>

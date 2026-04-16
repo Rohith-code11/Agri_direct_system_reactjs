@@ -1,6 +1,29 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBell,
+  faCartShopping,
+  faChartLine,
+  faClipboardList,
+  faHouse,
+  faLeaf,
+  faRightFromBracket,
+  faStore,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
+
 const ROLE_MENUS = {
   grower: ['Dashboard', 'Inventory', 'Orders', 'Notifications', 'Profile'],
   buyer: ['Dashboard', 'Marketplace', 'Cart', 'Orders', 'Notifications', 'Profile']
+};
+
+const MENU_ICONS = {
+  Dashboard: faHouse,
+  Inventory: faLeaf,
+  Marketplace: faStore,
+  Cart: faCartShopping,
+  Orders: faClipboardList,
+  Notifications: faBell,
+  Profile: faUser
 };
 
 const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
@@ -17,7 +40,7 @@ const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
       <div className="dashboard-navbar-top">
         <div className="dashboard-brand-wrap">
           <div className="dashboard-brand-logo" aria-hidden="true">
-            <span>AG</span>
+            <FontAwesomeIcon icon={faChartLine} />
           </div>
           <div>
             <p className="dashboard-navbar-eyebrow">AgriDirect Exchange</p>
@@ -32,6 +55,7 @@ const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
             <small>{user?.email || 'No email'}</small>
           </div>
           <button type="button" onClick={onLogout}>
+            <FontAwesomeIcon icon={faRightFromBracket} />
             Logout
           </button>
         </div>
@@ -45,6 +69,7 @@ const Navbar = ({ user, onLogout, activeMenu, onMenuChange }) => {
             className={`dashboard-menu-item ${activeMenu === menu ? 'active' : ''}`}
             onClick={() => onMenuChange(menu)}
           >
+            <FontAwesomeIcon icon={MENU_ICONS[menu] || faHouse} />
             {menu}
           </button>
         ))}

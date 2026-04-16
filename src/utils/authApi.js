@@ -120,10 +120,15 @@ export const createGrowerListing = async (token, formData) => {
 };
 
 export const updateGrowerListing = async (token, listingId, payload) => {
-  return sendAuthorizedRequest(`/listings/grower/${listingId}`, token, {
+  const response = await fetch(`${API_BASE_URL}/listings/grower/${listingId}`, {
     method: 'PUT',
-    body: JSON.stringify(payload)
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: payload
   });
+
+  return parseResponse(response);
 };
 
 export const deleteGrowerListing = async (token, listingId) => {

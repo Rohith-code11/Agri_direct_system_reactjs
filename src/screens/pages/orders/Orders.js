@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getBuyerOrders, getGrowerOrders, updateGrowerOrderStatus } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBox, faCircleCheck, faTruckFast } from '@fortawesome/free-solid-svg-icons';
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -114,9 +116,9 @@ const Orders = ({ token, role }) => {
               </div>
             </div>
 
-            <div className="commerce-meta-grid">
-              <p><strong>Subtotal:</strong> {formatCurrency(order.subtotalAmount)}</p>
-              <p><strong>Delivery:</strong> {formatCurrency(order.deliveryFee)}</p>
+              <div className="commerce-meta-grid">
+              <p><strong><FontAwesomeIcon icon={faBox} /> Subtotal:</strong> {formatCurrency(order.subtotalAmount)}</p>
+              <p><strong><FontAwesomeIcon icon={faTruckFast} /> Delivery:</strong> {formatCurrency(order.deliveryFee)}</p>
               <p><strong>Tax:</strong> {formatCurrency(order.taxAmount)}</p>
               <p><strong>Total:</strong> {formatCurrency(order.totalAmount)}</p>
               <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
@@ -153,6 +155,7 @@ const Orders = ({ token, role }) => {
                   ))}
                 </select>
                 <button type="button" onClick={() => onStatusSave(order.id)} disabled={busyOrderId === order.id}>
+                  <FontAwesomeIcon icon={faCircleCheck} />
                   {busyOrderId === order.id ? 'Saving...' : 'Update Status'}
                 </button>
               </div>

@@ -86,6 +86,10 @@ textarea {
   font: inherit;
 }
 
+svg[data-icon] {
+  flex: 0 0 auto;
+}
+
 .app-shell {
   width: min(1380px, calc(100% - 32px));
   margin: 18px auto 30px;
@@ -227,6 +231,9 @@ textarea {
 
 .feature-callout p {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .feature-list {
@@ -270,6 +277,12 @@ textarea {
   margin-bottom: 6px;
   font-size: 1.7rem;
   font-weight: 800;
+}
+
+.feature-metric-card svg {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #ffe7a8;
 }
 
 .feature-metric-card span {
@@ -383,6 +396,16 @@ textarea {
   font-weight: 700;
 }
 
+.field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-label svg {
+  color: var(--berry);
+}
+
 .auth-form input,
 .auth-form select,
 .profile-form input,
@@ -448,6 +471,10 @@ textarea {
   cursor: pointer;
   box-shadow: 0 12px 24px rgba(161, 86, 47, 0.22);
   transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .auth-form button:hover,
@@ -587,6 +614,16 @@ textarea {
   color: var(--muted);
 }
 
+.review-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-rating svg {
+  color: var(--gold);
+}
+
 .dashboard-navbar {
   margin-bottom: 18px;
   padding: 22px 24px;
@@ -621,6 +658,10 @@ textarea {
 
 .dashboard-brand-logo span {
   letter-spacing: 0.08em;
+}
+
+.dashboard-brand-logo svg {
+  font-size: 1.15rem;
 }
 
 .dashboard-navbar h1 {
@@ -685,6 +726,9 @@ textarea {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .dashboard-menu-item:hover {
@@ -775,6 +819,18 @@ textarea {
   background: linear-gradient(180deg, rgba(255, 253, 249, 0.96) 0%, rgba(255, 243, 235, 0.92) 100%);
   box-shadow: var(--shadow-card);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card-icon-wrap {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(255, 220, 208, 0.95) 0%, rgba(210, 240, 238, 0.95) 100%);
+  color: var(--berry);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dashboard-card:hover {
@@ -990,6 +1046,11 @@ textarea {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+  align-items: start;
+}
+
+.inventory-form-grid > * {
+  min-width: 0;
 }
 
 .inventory-check {
@@ -998,6 +1059,7 @@ textarea {
   gap: 10px;
   color: var(--surface-ink);
   font-weight: 700;
+  min-height: 56px;
 }
 
 .inventory-check input[type='checkbox'] {
@@ -1080,10 +1142,109 @@ textarea {
   gap: 8px;
 }
 
+.inventory-action-inline {
+  grid-template-columns: repeat(2, auto);
+  align-items: center;
+}
+
 .inventory-table input,
 .inventory-table select {
   min-width: 120px;
   width: 100%;
+}
+
+.inventory-product-title {
+  color: var(--primary-deep);
+}
+
+.inventory-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inventory-create-btn {
+  min-height: 42px;
+  background: linear-gradient(135deg, #1c9b68 0%, #12724c 100%);
+  color: #fff8f2;
+  border-color: transparent;
+  box-shadow: 0 12px 24px rgba(18, 114, 76, 0.24);
+}
+
+.inventory-feedback {
+  margin-top: 18px;
+}
+
+.inventory-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(17, 27, 22, 0.42);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.inventory-modal {
+  width: min(980px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  border-radius: 24px;
+  border: 1px solid rgba(31, 58, 46, 0.1);
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.98) 0%, rgba(250, 243, 235, 0.96) 100%);
+  box-shadow: 0 24px 80px rgba(18, 31, 25, 0.24);
+  padding: 22px;
+}
+
+.inventory-modal-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.inventory-modal-head h3 {
+  margin-top: 8px;
+  font-size: 1.35rem;
+}
+
+.inventory-modal-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 58, 46, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--primary-deep);
+  cursor: pointer;
+}
+
+.inventory-modal-form {
+  margin-top: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.inventory-upload-field {
+  grid-column: span 2;
+}
+
+.inventory-upload-field input[type='file'] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.inventory-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.inventory-submit-btn {
+  background: linear-gradient(135deg, #1c9b68 0%, #12724c 100%);
+  color: #fff8f2;
+  border-color: transparent;
+  box-shadow: 0 12px 24px rgba(18, 114, 76, 0.24);
 }
 
 .status-pill {
@@ -1145,20 +1306,52 @@ textarea {
 .marketplace-grid {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+}
+
+.section-icon-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.section-icon-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .marketplace-card {
   overflow: hidden;
 }
 
+.marketplace-card h3 {
+  color: var(--primary-deep);
+  font-weight: 800;
+  font-size: 1.18rem;
+  line-height: 1.15;
+}
+
 .marketplace-image-wrap {
+  position: relative;
   width: calc(100% + 36px);
   height: 210px;
   margin: -18px -18px 16px;
   background:
     linear-gradient(145deg, rgba(239, 108, 87, 0.16) 0%, rgba(111, 168, 255, 0.16) 56%, rgba(177, 77, 125, 0.14) 100%);
+}
+
+.marketplace-status-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  box-shadow: 0 10px 24px rgba(19, 53, 42, 0.16);
 }
 
 .marketplace-image {
@@ -1184,6 +1377,13 @@ textarea {
   font-size: 0.94rem;
 }
 
+.marketplace-card p strong,
+.commerce-meta-grid p strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .marketplace-card p strong {
   color: var(--surface-ink);
 }
@@ -1192,10 +1392,21 @@ textarea {
   margin-top: 14px;
   display: flex;
   gap: 10px;
+  justify-content: flex-start;
 }
 
 .marketplace-card-foot button {
-  flex: 1;
+  flex: 0 0 auto;
+}
+
+.marketplace-add-btn {
+  padding: 9px 14px;
+  min-height: 40px;
+  font-size: 0.88rem;
+  background: linear-gradient(135deg, #1c9b68 0%, #12724c 100%);
+  color: #fff8f2;
+  border-color: transparent;
+  box-shadow: 0 12px 24px rgba(18, 114, 76, 0.24);
 }
 
 .marketplace-qty-field {
@@ -1343,6 +1554,14 @@ textarea {
   .dashboard-layout {
     grid-template-columns: 1fr;
   }
+
+  .inventory-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .inventory-upload-field {
+    grid-column: span 2;
+  }
 }
 
 @media (max-width: 920px) {
@@ -1372,12 +1591,19 @@ textarea {
     justify-items: start;
   }
 
+  .inventory-hero-actions,
+  .inventory-modal-head,
+  .inventory-modal-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .auth-grid,
   .profile-grid,
-  .inventory-form-grid,
   .dashboard-card-grid,
   .dashboard-split,
   .dashboard-story-grid,
+  .marketplace-grid,
   .marketplace-filters,
   .commerce-meta-grid,
   .cart-item-actions,
@@ -1386,8 +1612,20 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .inventory-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory-upload-field {
+    grid-column: auto;
+  }
+
   .marketplace-card-foot {
     flex-direction: column;
+  }
+
+  .inventory-action-inline {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { addCartItem, getMarketplaceListings } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus, faFilter, faLocationDot, faTag } from '@fortawesome/free-solid-svg-icons';
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -9,7 +11,7 @@ const formatCurrency = (value) => {
   }).format(value || 0);
 };
 
-const Marketplace = ({ token, onOpenCart }) => {
+const Marketplace = ({ token }) => {
   const [filters, setFilters] = useState({
     search: '',
     category: '',
@@ -98,9 +100,8 @@ const Marketplace = ({ token, onOpenCart }) => {
       <div className="dashboard-hero">
         <div>
           <h2>Marketplace</h2>
-          <p>Source verified produce from growers with smart filters and live listing data.</p>
+          <p>Discover fresh farm produce, compare growers, and place orders with live pricing, quantity, and location filters.</p>
         </div>
-        <span className="dashboard-chip">Buyer View</span>
       </div>
 
       <form className="marketplace-filters" onSubmit={onApplyFilters}>
@@ -162,18 +163,18 @@ const Marketplace = ({ token, onOpenCart }) => {
           {listings.map((item) => (
             <article className="dashboard-card marketplace-card" key={item.id}>
               <div className="marketplace-image-wrap">
+                <span className="status-pill status-active marketplace-status-pill">Available</span>
                 {item.imageUrl ? (
                   <img src={item.imageUrl} alt={item.title} className="marketplace-image" />
                 ) : (
                   <div className="marketplace-image-placeholder">No Image</div>
                 )}
               </div>
-              <span className="status-pill status-active">Available</span>
               <h3>{item.title}</h3>
               <p>{item.description || 'No description available.'}</p>
-              <p><strong>Category:</strong> {item.categoryName || '-'}</p>
+              <p><strong><FontAwesomeIcon icon={faTag} /> Category:</strong> {item.categoryName || '-'}</p>
               <p><strong>Grower:</strong> {item.growerName}</p>
-              <p><strong>Location:</strong> {item.townCity}, {item.county}</p>
+              <p><strong><FontAwesomeIcon icon={faLocationDot} /> Location:</strong> {item.townCity}, {item.county}</p>
               <p><strong>Price:</strong> {formatCurrency(item.pricePerUnit)} / {item.unit}</p>
               <p><strong>Available Qty:</strong> {item.quantityAvailable} {item.unit}</p>
               <p><strong>Min Order:</strong> {item.minOrderQty} {item.unit}</p>
@@ -189,8 +190,8 @@ const Marketplace = ({ token, onOpenCart }) => {
                 />
               </label>
               <div className="marketplace-card-foot">
-                <button type="button" onClick={onOpenCart}>Go to Cart</button>
-                <button type="button" className="secondary-btn" onClick={() => onAddToCart(item.id)} disabled={busyListingId === item.id}>
+                <button type="button" className="marketplace-add-btn" onClick={() => onAddToCart(item.id)} disabled={busyListingId === item.id}>
+                  <FontAwesomeIcon icon={faCartPlus} />
                   {busyListingId === item.id ? 'Adding...' : 'Add to Cart'}
                 </button>
               </div>
@@ -203,3 +204,6 @@ const Marketplace = ({ token, onOpenCart }) => {
 };
 
 export default Marketplace;
+      <div className="section-icon-row">
+        <span><FontAwesomeIcon icon={faFilter} /> Smart filters active</span>
+      </div>

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getNotifications, markAllNotificationsRead, markNotificationRead } from '../../../utils/authApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faCheckDouble, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
 
 const formatDate = (value) => {
   if (!value) {
@@ -76,8 +78,9 @@ const Notifications = ({ token }) => {
           <p>Stay on top of order confirmations, shipment progress, and payment updates.</p>
         </div>
         <div className="notification-actions">
-          <span className="dashboard-chip">{data.unreadCount} unread</span>
+          <span className="dashboard-chip"><FontAwesomeIcon icon={faBell} /> {data.unreadCount} unread</span>
           <button type="button" className="secondary-btn" onClick={onReadAll} disabled={busyId === 'all' || data.unreadCount === 0}>
+            <FontAwesomeIcon icon={faCheckDouble} />
             {busyId === 'all' ? 'Updating...' : 'Mark all read'}
           </button>
         </div>
@@ -101,6 +104,7 @@ const Notifications = ({ token }) => {
               <small>{formatDate(notification.createdAt)}</small>
               {!notification.isRead ? (
                 <button type="button" onClick={() => onRead(notification.id)} disabled={busyId === notification.id}>
+                  <FontAwesomeIcon icon={faEnvelopeOpenText} />
                   {busyId === notification.id ? 'Updating...' : 'Mark as read'}
                 </button>
               ) : (
